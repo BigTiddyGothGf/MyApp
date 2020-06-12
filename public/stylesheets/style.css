@@ -1,8 +1,19 @@
 body {
+  background-color: rgba(26, 26, 26);
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
-a {
-  color: #00B7FF;
+a i {
+  margin-right: 0.4rem;
+}
+.error404{
+  color: rgba(196, 194, 194);
+  text-align: center;
+}
+.error404 h1{
+  width: 100%;
+  font-size: 30rem;
+  color: rgb(196, 194, 194);
+  font-weight: bold;
+  text-shadow: 10px 10px 10px rgba(165, 48, 219, 0.253);
 }
