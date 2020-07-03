@@ -1,27 +1,63 @@
-body {
-  background-color: rgba(26, 26, 26);
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Header */
+#header{
+  background: rgb(32, 32, 32);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 60px;
 }
-a {
-  color: rgb(76, 0, 255);
+#brand{
+  font-weight: bold;
+  font-size: 50px;
+  color: rgba(188, 48, 253, 0.849);
 }
-b {
-  font-size: 100px;
-  color: rgba(165, 48, 219, 0.253);
+a{
+  color: rgba(188, 48, 253, 0.849);
 }
-a i {
+a i{
   margin-right: 0.4rem;
 }
-h1 {
+
+
+/* Main Area */
+#chat{
+  padding-top: 10px;
+}
+body{
+  background-color: rgba(26, 26, 26);
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h1{
   color: rgba(255, 255, 255, 0.719);
 }
-h2 {
+h2{
   color: rgba(255, 255, 255, 0.719);
 }
-p {
+p{
   color: rgba(255, 255, 255, 0.719);
 }
+.message{
+ margin-bottom: 30px;
+}
+.message .text{
+  padding: 15px;
+  border: 10px rgba(165, 48, 219, 0.253);
+}
+
+
+/* Friends List*/
+#friends-list{
+  background-color: rgba(48, 45, 49, 0.253);
+  padding-top: 10px;
+}
+
+
+/* Sidebar*/
+#sidebar{
+  background-color: rgb(36, 35, 35);
+  padding-top: 10px;
+}
+
+
+/* Error Page */
 .error404{
   color: rgba(196, 194, 194);
   text-align: center;
@@ -32,14 +68,4 @@ p {
   color: rgb(196, 194, 194);
   font-weight: bold;
   text-shadow: 10px 10px 10px rgba(165, 48, 219, 0.253);
-}
-.message{
- margin-bottom: 30px;
-}
-.message .text{
-  padding: 15px;
-  border: 10px rgba(165, 48, 219, 0.253);
-}
-#friends-list {
-  background-color: rgba(48, 45, 49, 0.253);
 }
