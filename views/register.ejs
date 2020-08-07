@@ -6,16 +6,16 @@
         <p>PIC</p>
       </div>  
       <div id="friends-list" class="col-md-2">
-        <h2>TESTING</h2>
+        <h2>REGISTER</h2>
       </div>
-      <main id="chat" role="main" class="col-md-9">
-        <h1>Login</h1>
-          <form action="/login" method="post">
+      <main id="register" role="main" class="col-md-9">
+        <form action="/register" method="post">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
-            <button type="submit">Login</button>
-          </form>
-      </main>
-    </div> <!-- end .row --> 
+            <input type="password" name="passwordConfirm" placeholder="Confirm Password">
+            <button type="submit">Register</button>
+        </form>
+    </main>
+  </div> <!-- end .row --> 
 </div><!-- end #main -->
 <%- include('partials/footer'); %>

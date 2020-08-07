@@ -1,0 +1,29 @@
+<%- include('partials/header'); %> 
+<div id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-md-1">
+        <p>PIC</p>
+      </div>  
+      <div id="friends-list" class="col-md-2">
+        <h2>ACCOUNT</h2>
+      </div>
+      <main id="chat" role="main" class="col-md-9">
+          <h3>my profile</h3>
+        <form action="/account" method="post" enctype="multipart/form-data">
+            <input type="text" name="displayName" placeholder="Display Name">
+            <input type="email" name="email" placeholder="Email">
+            <input type="file" name="avatar">
+              <button type="submit">Update</button>
+          </form>
+
+          <h3>change password</h3>
+      <form action="/password" method="post">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="passwordConfirm" placeholder="Confirm Password">
+        <button type="submit">Update Password</button>
+      </form>
+      </main>
+    </div> <!-- end .row --> 
+</div><!-- end #main -->
+<%- include('partials/footer'); %>

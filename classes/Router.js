@@ -11,8 +11,8 @@ class Router{
 
     constructor(){
         this.setVariables();
-        this.addBaseRoutes();
         this.addControllers();
+        this.addBaseRoutes();
         this.handle404s();
         this.handleErrors();
     }
@@ -38,9 +38,18 @@ class Router{
      */
     addBaseRoutes() {
         AraDTApp.get('/', this.index);
+        AraDTApp.get('/register', this.signup);
+        AraDTApp.get('/working', this.working); //Added to see working page. (remove in future)
     }
 
+    signup(request, response){
+        response.render('register');
+    }
 
+    working(request, response){ // Added to see working page. (remove in future)
+        response.render('working');
+    }
+    
     /**
      * Add controllers for key models, 
      * e.g. Users, Channels, Messages

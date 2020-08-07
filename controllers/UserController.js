@@ -116,52 +116,63 @@ class UserController{
 
     /* YOU NEED TO ADD COMMENTS FROM HERE ON */
 
+    // Updates the users account info.
     updateAccount =  async (request, response) => {
-
+        // Gets the users info from Firebase.
         var currentUser = AraDTUserModel.getCurrentUser();
         if (currentUser) {
             try{
                 await AraDTUserModel.update(request, response)
                     .then(() => {
+                        // Sends message telling user the profile update was successful.
                         response.locals.errors.profile = ['Your details have been updated'];
                         response.render('account');
                     }).catch((error) => {
+                        // Account update failed so sends error message.
                         response.locals.errors.profile = [error.message];
                         response.render('account');
                     });
             } catch(errors) {
+                // Error message if it failed.
                 response.locals.errors.profile = errors;
                 response.render('account');
             }
         } else {
+            // Logs the user out if their info dosent watch.
             this.logout(request, response);
         }
 
     };
     
+    // Updates the user password.
     updatePassword = async (request, response) => {
-
+        //Gets the users password from Firebase.
         var currentUser = AraDTUserModel.getCurrentUser();
         if (currentUser) {
             try{
                 await AraDTUserModel.updatePassword(request, response)
                     .then(() => {
+                        // Updates the users password.
                         response.locals.errors.password = ['Your password has been updated'];
                         response.render('account');
                     }).catch((error) => {
+                        // Password change has failed so sends error message.
                         response.locals.errors.password = [error.message];
                         response.render('account');
                     });
             } catch(errors) {
+                // Error message if it failed.
                 response.locals.errors.password = errors;
                 response.render('account');
             }
         } else {
+            // Logs the user out if the info dosent match.
             this.logout(request, response);
         }
 
     };
 
+    // Gets the users account info from Firebase.
     getAccount(request, response){
         
         if (!request.session.token) {
@@ -170,6 +181,7 @@ class UserController{
         response.render('account');
     }
 
+    // Logs the users out of their account.
     logout = async (request, response) => {
         request.session.errors.general = ['You have been logged out'];
         response.locals.loggedin = false;
