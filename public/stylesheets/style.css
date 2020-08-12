@@ -14,11 +14,14 @@ a{
 a i{
   margin-right: 0.4rem;
 }
+.navbar-toggler{
+  background-color: rgba(77, 77, 77, 0.253)
+}
 
 
-/* Main Area */
-#chat{
-  padding-top: 10px;
+/*Universal*/
+h3{
+  color: rgba(188, 48, 253, 0.849);
 }
 body{
   background-color: rgba(26, 26, 26);
@@ -32,6 +35,12 @@ h2{
 }
 p{
   color: rgba(255, 255, 255, 0.719);
+}
+
+
+/* Main Area */
+#chat{
+  padding-top: 10px;
 }
 .message{
  margin-bottom: 30px;

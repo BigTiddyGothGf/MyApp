@@ -9,15 +9,14 @@
         <h2>ACCOUNT</h2>
       </div>
       <main id="chat" role="main" class="col-md-9">
-          <h3>my profile</h3>
+          <h3>My profile</h3>
         <form action="/account" method="post" enctype="multipart/form-data">
-            <input type="text" name="displayName" placeholder="Display Name">
-            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="displayName" placeholder="Display Name" value="<%= locals.user.displayName %>">
+            <input type="email" name="email" placeholder="Email" value="<%= locals.user.email %>">
             <input type="file" name="avatar">
               <button type="submit">Update</button>
           </form>
-
-          <h3>change password</h3>
+          <h3>Change password</h3>
       <form action="/password" method="post">
         <input type="password" name="password" placeholder="Password">
         <input type="password" name="passwordConfirm" placeholder="Confirm Password">
