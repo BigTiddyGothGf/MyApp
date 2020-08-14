@@ -10,13 +10,29 @@
       </div>
       <main id="chat" role="main" class="col-md-9">
         <h2>Login</h2>
-        <form action="/login" method="post">
-          <input type="email" name="email" placeholder="Email">
-          <input type="password" name="password" placeholder="Password">
-          <button type="submit">Login</button>
+        <% if (locals.errors && locals.errors.login) { %>
+          <% locals.errors.login.forEach(function(error) { %>
+            <p class="alert alert-primary" role="alert"><%= error %></p>
+          <% }) %>
+        <% } %>
+        <form action="/login" method="post" class="chat-form">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         <h2>Register</h2>
-        <form action="/register" method="post">
+        <% if (locals.errors && locals.errors.register) { %>
+          <% locals.errors.register.forEach(function(error) { %>
+            <p class="alert alert-primary" role="alert"><%= error %></p>
+          <% }) %>
+        <% } %>
+        <form action="/register" method="post" class="chat-form">
           <input type="email" name="email" placeholder="Email">
           <input type="password" name="password" placeholder="Password">
           <input type="password" name="passwordConfirm" placeholder="Confirm Password">

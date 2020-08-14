@@ -36,6 +36,12 @@ h2{
 p{
   color: rgba(255, 255, 255, 0.719);
 }
+.chat-form label{
+  color: rgba(255, 255, 255, 0.719);
+}
+.form-control{
+  width: 60%;
+}
 
 
 /* Main Area */
