@@ -26,18 +26,6 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <h2>Register</h2>
-        <% if (locals.errors && locals.errors.register) { %>
-          <% locals.errors.register.forEach(function(error) { %>
-            <p class="alert alert-primary" role="alert"><%= error %></p>
-          <% }) %>
-        <% } %>
-        <form action="/register" method="post" class="chat-form">
-          <input type="email" name="email" placeholder="Email">
-          <input type="password" name="password" placeholder="Password">
-          <input type="password" name="passwordConfirm" placeholder="Confirm Password">
-          <button type="submit">Register</button>
-        </form>
       </main>
     </div> <!-- end .row --> 
 </div><!-- end #main -->

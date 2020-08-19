@@ -1,0 +1,58 @@
+<%- include('partials/header'); %> 
+<div id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-md-1">
+        <p>PIC</p>
+      </div>  
+      <div id="friends-list" class="col-md-2">
+        <h2>TESTING</h2>
+      </div>
+      <main id="channels" role="main" class="col-md-9">
+        <h2>channel</h2>
+
+        <% var users = locals.channels.users %>
+        <form id="channel-create-form" action="/channels/add" method="post" enctype="multipart/form-data">
+          <input type="text" class="form-control" name="name" placeholder="Display Name" value="">
+          <input type="file" class="custom-file-input" name="avatar" id="avatar-upload">
+          <% if (users) { %>
+            <% users.forEach(function(user) { %>
+              <input class="user-check-input" id="user<%= user.id %>" type="checkbox" name="users" value="<%= user.id %>">
+              <p><%= user.name %></p>
+            <% }) %>
+          <% } %>
+          <button id="update" type="submit">Create</button>
+        </form>
+
+        <div id="owned-channels" class="user-channels">
+          <h4>Your Channels</h4>
+        <% if (owned) { %>
+          <ul>
+          <% owned.forEach(function(channel) { %>
+            <li>
+              <img src="<%= channel.image %>" alt="<%= channel.name %>">
+              <a href="/channel/<%= channel.id %>/"><%= channel.name %></a>
+              <a href="/channels/delete/<%= channel.id %>/"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </li>
+          <% }) %>
+          </ul>
+        <% }  %>
+        </div>
+        <div id="subscribed-channels" >
+          <h4>Subscribed Channels</h4>
+        <% if (subscribed) { %>
+          <ul>
+          <% subscribed.forEach(function(channel) { %>
+            <li>
+              <img src="<%= channel.image %>" alt="<%= channel.name %>">
+              <a href="/channel/<%= channel.slug %>/"><%= channel.name %></a>
+            </li>
+          <% }) %>
+          </ul>
+        <% }  %>
+        </div>
+        
+      </main>
+    </div> <!-- end .row --> 
+</div><!-- end #main -->
+<%- include('partials/footer'); %>
