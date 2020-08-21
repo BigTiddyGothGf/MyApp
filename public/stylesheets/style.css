@@ -17,12 +17,12 @@ a i{
 .navbar-toggler{
   background-color: rgba(77, 77, 77, 0.253)
 }
+#down-arrow{
+  color: rgba(255, 255, 255, 0.719);
+}
 
 
 /*Universal*/
-h3{
-  color: rgba(188, 48, 253, 0.849);
-}
 body{
   background-color: rgba(26, 26, 26);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -31,6 +31,12 @@ h1{
   color: rgba(255, 255, 255, 0.719);
 }
 h2{
+  color: rgba(255, 255, 255, 0.719);
+}
+h3{
+  color: rgba(188, 48, 253, 0.849);
+}
+h4{
   color: rgba(255, 255, 255, 0.719);
 }
 p{
@@ -59,6 +65,12 @@ pre{
   padding: 15px;
   border: 10px rgba(165, 48, 219, 0.253);
 }
+main{
+  padding: 30%;
+}
+
+
+/* Channel Page */
 
 
 /* Friends List*/

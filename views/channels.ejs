@@ -24,6 +24,7 @@
           <button id="update" type="submit">Create</button>
         </form>
 
+        <% var owned = locals.channels.owned %>
         <div id="owned-channels" class="user-channels">
           <h4>Your Channels</h4>
         <% if (owned) { %>
@@ -38,6 +39,8 @@
           </ul>
         <% }  %>
         </div>
+
+        <% var subscribed = locals.channels.subscribed %>
         <div id="subscribed-channels" >
           <h4>Subscribed Channels</h4>
         <% if (subscribed) { %>
