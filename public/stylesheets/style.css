@@ -39,11 +39,24 @@ h3{
 h4{
   color: rgba(255, 255, 255, 0.719);
 }
+h5{
+  color: rgba(188, 48, 253, 0.849);
+  font-size: 50px;/*
+  padding-bottom: 5%;
+  padding-left: 30px;
+  padding-right: 30px;*/
+}
+#welcome{
+  text-align: middle; /* */
+}
 p{
   color: rgba(255, 255, 255, 0.719);
 }
 .chat-form label{
   color: rgba(255, 255, 255, 0.719);
+}
+.chat-form{
+  padding-bottom: 10%;
 }
 .form-control{
   width: 60%;
@@ -52,11 +65,19 @@ p{
 pre{
   color: rgba(255, 255, 255, 0.719);
 }
+#notRegistered{
+  padding-bottom: 10px;
+}
 
 
 /* Main Area */
 #chat{
-  padding-top: 10px;
+  padding-top: 5%;
+  padding-left: 10%;
+}
+#register{
+  padding-top: 5%;
+  padding-left: 10%;
 }
 .message{
  margin-bottom: 30px;
@@ -74,7 +95,7 @@ main{
 
 
 /* Friends List*/
-#friends-list{
+#sidebar1{
   background-color: rgba(48, 45, 49, 0.253);
   padding-top: 10px;
 }
@@ -84,6 +105,12 @@ main{
 #sidebar{
   background-color: rgb(36, 35, 35);
   padding-top: 10px;
+}
+
+
+/* Error */
+.alert{
+  width: 60%;
 }
 
 
