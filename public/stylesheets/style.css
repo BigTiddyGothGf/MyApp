@@ -41,18 +41,18 @@ h4{
 }
 h5{
   color: rgba(188, 48, 253, 0.849);
-  font-size: 50px;/*
+  font-size: 50px;
+  font-weight: bold;
+  /*
   padding-bottom: 5%;
   padding-left: 30px;
-  padding-right: 30px;*/
-}
-#welcome{
-  text-align: middle; /* */
+  padding-right: 30px;
+  */
 }
 p{
   color: rgba(255, 255, 255, 0.719);
 }
-.chat-form label{
+.form-group label{
   color: rgba(255, 255, 255, 0.719);
 }
 .chat-form{
@@ -71,11 +71,19 @@ pre{
 
 
 /* Main Area */
-#chat{
+#login{
+  padding-top: 5%;
+  padding-left: 10%;
+}
+#channels{
   padding-top: 5%;
   padding-left: 10%;
 }
 #register{
+  padding-top: 5%;
+  padding-left: 10%;
+}
+#account{
   padding-top: 5%;
   padding-left: 10%;
 }
@@ -88,6 +96,13 @@ pre{
 }
 main{
   padding: 30%;
+}
+
+
+/* Avatar */
+.avatar{
+  background-color: rgba(26, 26, 26);
+  color: rgba(26, 26, 26);
 }
 
 
@@ -116,6 +131,7 @@ main{
 
 /* Error Page */
 .error404{
+  padding-top: 1%;
   color: rgba(196, 194, 194);
   text-align: center;
 }
