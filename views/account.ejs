@@ -14,7 +14,7 @@
           <% } %>
         <form action="/account" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="email">Email address</label>
+            <label for="email">Email Address</label>
             <input type="email" value="<%= locals.user.email %>" name="email" class="form-control" id="email" placeholder="Enter email">
           </div>
           <div class="form-group">
@@ -26,7 +26,7 @@
           <% if (locals.user.photoURL) { %>
               <p><img src="<%= locals.user.photoURL %>" alt="" id=""></p>
           <% } %>
-            <input type="file" name="avatar" class="button avatar">
+            <input type="file" name="avatar" class="button" id="file-button">
           </div>
           <button type="submit" class="btn btn-primary">Submit Changes</button>
         </form>

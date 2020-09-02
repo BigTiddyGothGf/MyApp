@@ -5,7 +5,7 @@
 }
 #brand{
   font-weight: bold;
-  font-size: 50px;
+  font-size: 60px;
   color: rgba(188, 48, 253, 0.849);
 }
 a{
@@ -34,6 +34,7 @@ h2{
   color: rgba(255, 255, 255, 0.719);
 }
 h3{
+  font-size: 40px;
   color: rgba(188, 48, 253, 0.849);
 }
 h4{
@@ -54,6 +55,10 @@ p{
 }
 .form-group label{
   color: rgba(255, 255, 255, 0.719);
+}
+label{
+  color: rgba(255, 255, 255, 0.719);
+  width: 100%;
 }
 .chat-form{
   padding-bottom: 10%;
@@ -100,13 +105,19 @@ main{
 
 
 /* Avatar */
-.avatar{
+#file-button{
+  width: 100%;
   background-color: rgba(26, 26, 26);
-  color: rgba(26, 26, 26);
+  color: rgba(255, 255, 255, 0.719);
 }
 
 
 /* Channel Page */
+#channel-pic-input{
+  width: 100%;
+  background-color: rgba(26, 26, 26);
+  color: rgba(255, 255, 255, 0.719);
+}
 
 
 /* Friends List*/

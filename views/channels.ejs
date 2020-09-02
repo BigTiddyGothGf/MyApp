@@ -6,12 +6,15 @@
         
       </div>
       <main id="channels" role="main" class="col-md-8">
-        <h2>Channel</h2>
+        <h3>Channels</h3>
 
         <% var users = locals.channels.users %>
         <form id="channel-create-form" action="/channels/add" method="post" enctype="multipart/form-data">
-          <input type="text" class="form-control" name="name" placeholder="Display Name" value="">
-          <input type="file" class="custom-file-input" name="avatar" id="avatar-upload">
+            <label>Channel Display Name</label>
+          <input type="text" class="form-control" name="name" placeholder="Channel Display Name" value="">
+            <label>Channel Avatar</label>
+          <input type="file" name="avatar" id="channel-pic-input">
+            <label>Select which users to add to the channel</label>
           <% if (users) { %>
             <% users.forEach(function(user) { %>
               <input class="user-check-input" id="user<%= user.id %>" type="checkbox" name="users" value="<%= user.id %>">
