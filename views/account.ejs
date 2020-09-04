@@ -6,7 +6,7 @@
         
       </div>
       <main id="account" role="main" class="col-md-8">
-          <h3>My profile</h3>
+          <h3>My Profile</h3>
           <% if (locals.errors && locals.errors.profile) { %>
             <% locals.errors.profile.forEach(function(error) { %>
               <p class="alert alert-primary" role="alert"><%= error %></p>
@@ -21,10 +21,12 @@
             <label for="displayName">Display Name</label>
             <input type="text" value="<%= locals.user.displayName %>" name="displayName" class="form-control" id="displayName" placeholder="Display Name">
           </div>
-          <div class="form-group">
+          <div class="form-group avatar">
             <label for="avatar">Avatar</label>
           <% if (locals.user.photoURL) { %>
-              <p><img src="<%= locals.user.photoURL %>" alt="" id=""></p>
+              <p>
+                <img src="<%= locals.user.photoURL %>" alt="">
+              </p>
           <% } %>
             <input type="file" name="avatar" class="button" id="file-button">
           </div>

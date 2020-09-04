@@ -8,10 +8,22 @@
   font-size: 60px;
   color: rgba(188, 48, 253, 0.849);
 }
+t{
+  padding-left: 20px;
+}
 a{
-  color: rgba(188, 48, 253, 0.849);
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.719);
+  font-weight: bold;
 }
 a i{
+  margin-right: 0.4rem;
+}
+d{
+  font-weight: bold;
+  color: rgba(188, 48, 253, 0.849);
+}
+d i{
   margin-right: 0.4rem;
 }
 .navbar-toggler{
@@ -34,11 +46,13 @@ h2{
   color: rgba(255, 255, 255, 0.719);
 }
 h3{
+  font-weight: bold;
   font-size: 40px;
   color: rgba(188, 48, 253, 0.849);
 }
 h4{
-  color: rgba(255, 255, 255, 0.719);
+  font-weight: bold;
+  color: rgba(188, 48, 253, 0.849);
 }
 h5{
   color: rgba(188, 48, 253, 0.849);
@@ -52,13 +66,6 @@ h5{
 }
 p{
   color: rgba(255, 255, 255, 0.719);
-}
-.form-group label{
-  color: rgba(255, 255, 255, 0.719);
-}
-label{
-  color: rgba(255, 255, 255, 0.719);
-  width: 100%;
 }
 .chat-form{
   padding-bottom: 10%;
@@ -104,7 +111,60 @@ main{
 }
 
 
+/*Labels*/
+.form-group label{
+  color: rgba(255, 255, 255, 0.719);
+}
+label{
+  color: rgba(255, 255, 255, 0.719);
+  width: 100%;
+}
+#channel-dsiplay-name{
+  padding-top: 15px;
+}
+#channel-avatar{
+  padding-top: 30px;
+}
+#select-which-user-to-add-to-the-channel{
+  padding-top: 30px;
+}
+
+
 /* Avatar */
+
+/*.avatar{
+  width: 40%;
+  border-radius: 15px;
+}*/
+.avatar img{
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  background-image: "locals.user.photoURL";
+  background-size: cover;
+}
+#owned-channels img{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-image: "channel.image";
+  background-size: cover;
+}
+#subscribed-channels img{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-image: "channel.image";
+  background-size: cover;
+}
+
+
+/*Buttons*/
+#channel-pic-input{
+  width: 100%;
+  background-color: rgba(26, 26, 26);
+  color: rgba(255, 255, 255, 0.719);
+}
 #file-button{
   width: 100%;
   background-color: rgba(26, 26, 26);
@@ -112,11 +172,9 @@ main{
 }
 
 
-/* Channel Page */
-#channel-pic-input{
-  width: 100%;
-  background-color: rgba(26, 26, 26);
-  color: rgba(255, 255, 255, 0.719);
+/*Channels*/
+#your-channels{
+  padding-top: 30px;
 }
 
 
