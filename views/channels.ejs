@@ -28,7 +28,7 @@
           <% subscribed.forEach(function(channel) { %>
             <li>
               <img src="<%= channel.image %>" alt="<%= channel.name %>">
-              <a href="/channel/<%= channel.slug %>/"><%= channel.name %></a>
+              <a href="/channel/<%= channel.id %>/"><%= channel.name %></a>
             </li>
           <% }) %>
           </ul>
@@ -41,8 +41,8 @@
 
         <% var users = locals.channels.users %>
         <form id="channel-create-form" action="/channels/add" method="post" enctype="multipart/form-data">
-            <label id="channel-dsiplay-name">Channel Display Name</label>
-          <input type="text" class="form-control" name="name" placeholder="Channel Display Name" value="" maxlength = "30">
+            <label id="channel-dsiplay-name">Channel Display Name (max: 20 characters)</label>
+          <input type="text" class="form-control" name="name" placeholder="Channel Display Name" value="" maxlength = "20">
             <label id="channel-avatar">Channel Avatar</label>
           <input type="file" name="avatar" id="channel-pic-input">
             <label id="select-which-user-to-add-to-the-channel">Select which users to add to the channel</label>

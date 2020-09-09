@@ -1,0 +1,60 @@
+<%- include('partials/header'); %> 
+<% 
+var showChannel = locals.channel.channel
+var messages = locals.messages
+var user = locals.user
+var participants = (locals.channel.inUsers) ? locals.channel.inUsers : false
+%> 
+			<div id="main">
+				<div class="container-fluid">
+					<div class="row">
+						<div id="sidebar" class="col-md-5 col-sm-6 d-none d-sm-block">
+							<% if (participants) { %>
+							<div id="participants">
+								<h4>Channel Members</h4>
+								<ul class="list-group">
+								<% participants.forEach(function(user) { %>
+									<li id="user<%= user.id %>">
+										<div class="avatar">
+											<img src="<%= user.image %>" alt="<%= user.name %>">
+										</div>
+										<p><%= user.name %> <small class="text-muted d-none"> typing... </small></p>
+									</li>
+								<% }) %>
+								</ul>
+							</div>
+							<% } else { %>
+								<p><div class="alert alert-primary" role="alert">Make some friends on here and add them to your channels!</div></p>
+							<% }  %>
+						</div>  
+						<main role="main" class="col-md-7 col-sm-6">
+							<h1><%= showChannel.name %></h1>
+							<div id="chat">
+							<% if (messages) { %>
+								<% messages.forEach(function(message) { %>
+								<div class="message <%=message.direction%>" data-time="<%=message.time%>">
+									<div class="user">
+										<img src="<%=message.user.image%>" alt="Image">
+										<p><%=message.user.name%></p>
+									</div>
+									<p><%=message.msg%></p>
+									<small class="text-muted time"></small>
+								</div>
+								<% }) %>
+							<% }  %>
+							</div>           
+							<div id="message">
+								<form id="message-form">
+									<textarea id="message-box" placeholder="Type your message here"></textarea>
+									<input 
+										data-user='{"uid":"<%= locals.user.uid %>","name":"<%= locals.user.displayName %>","image":"<%= locals.user.photoURL %>"}'
+										data-channel='{"uid":"<%= showChannel.id %>","name":"<%= showChannel.name %>"}'
+										type="hidden" id="chat-info">
+									<button id="send-message" type="submit">Send</button>
+								</form>
+							</div>
+						</main>
+					</div> <!-- end .row --> 
+				</div><!-- end .container-fluid -->
+			</div><!-- end #main -->
+<%- include('partials/footer'); %>

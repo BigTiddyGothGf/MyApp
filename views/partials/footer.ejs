@@ -1,23 +1,28 @@
-		<% //ALL LOCALS DATA %>
+        <% //ALL LOCALS DATA %>
 		<% if (locals.errors) { %>
-		<% var errorKeys = JSON.stringify(Object.keys(locals.errors), null, 2); %>
-		<pre>Error keys: <%= errorKeys %></pre>
 		<% var errorData = JSON.stringify(locals.errors, null, 2); %>
 		<pre>Errors: <%= errorData %></pre>
 		<% } %>
 		<% if (locals.user) { %>
-		<% var userKeys = JSON.stringify(Object.keys(locals.user), null, 2); %>
-		<pre>User keys: <%= userKeys %></pre>
 		<% var userData = JSON.stringify(locals.user, null, 2); %>
 		<pre>User: <%= userData %></pre>
 		<% } %>
 		<% if (locals.channels) { %>
-		<% var channelKeys = JSON.stringify(Object.keys(locals.channels), null, 2); %>
-		<pre>Channel keys: <%= channelKeys %></pre>
 		<% var channels = JSON.stringify(locals.channels, null, 2); %>
 		<pre>Channels: <%= channels %></pre>
 		<% } %>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<% if (locals.channel) { %>
+		<% var channel = JSON.stringify(locals.channel, null, 2); %>
+		<pre>Channel: <%= channel %></pre>
+		<% } %>
+		<% if (locals.messages) { %>
+		<% var messages = JSON.stringify(locals.messages, null, 2); %>
+		<pre>Messages: <%= messages %></pre>
+		<% } %>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="/socket/socket.io.js"></script>
+		<script src="/javascripts/chat.js"></script>
+	</body>
 </html>

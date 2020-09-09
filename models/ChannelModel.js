@@ -36,11 +36,11 @@ class ChannelModel{
      * 
      * @returns {Object} channel data
      */
-    readChannel = async (channelId) => {
+    fetchChannel = async (channelId) => {
 
         //Fetch channel and see if it exists
         var channelDoc = AraDTDatabase.storage.collection('channels').doc(channelId);
-        var editChannel = {};
+        var channel = {};
         await channelDoc.get()
             .then((datum) => {
                 if (!datum.exists) {
@@ -48,7 +48,7 @@ class ChannelModel{
                     throw new Error(['This channel does not exist']);
                 } else {
                     //Get channel data
-                    editChannel = this.getChannelData(datum);
+                    channel = this.getChannelData(datum);
                 }
             })
             .catch((error) => {
@@ -58,23 +58,24 @@ class ChannelModel{
         //Create initial arrays of users who belong, and users who do not
         var inUsers = [];
         var outUsers = [];
+        var hasUsers = !AraDTValidator.isEmptyObj(channel.users);
         
         //Loop through all users and assign
         await AraDTUserModel.getUsers()
             .then((data) => {
                 data.forEach((datum) => {
-                    if (!AraDTValidator.isEmptyObj(editChannel.users) 
-                        && editChannel.users.includes(datum.id)) {
+                    if (channel.owner == datum.uid ||  
+                        (hasUsers && channel.users.includes(datum.uid))) {
                         inUsers.push({
-                            id: datum.id,
-                            name: datum.name,
-                            image: datum.image,
+                            id: datum.uid,
+                            name: datum.displayName,
+                            image: datum.photoURL,
                         });
                     } else {
                         outUsers.push({
-                            id: datum.id,
-                            name: datum.name,
-                            image: datum.image,
+                            id: datum.uid,
+                            name: datum.displayName,
+                            image: datum.photoURL,
                         });
                     }
                 });
@@ -85,10 +86,48 @@ class ChannelModel{
 
         //return all user data
         return{
-            editChannel,
+            channel,
             inUsers,
             outUsers
         }
+    }
+    
+    /**
+     * readMessage method retrieves last 10 messages
+     * 
+     * @param {string} MessageId Message to fetch from Firebase
+     * 
+     * @returns {Object} Message data
+     */
+    fetchMessages = async (channelId, userId) => {
+
+        //Fetch message and see if it exists
+        var messages = [];
+        await AraDTDatabase.storage.collection('messages')
+            .where('channelId', '==', channelId)
+            .orderBy('time', 'desc')
+            .limit(10)
+            .get()
+            .then((data) => {
+                data.forEach((message) => {
+                    var message = message.data();
+                    message.direction = 'in'
+                    if (message.userId == userId) {
+                        message.direction = 'out'
+                    }
+                    messages.push(message);
+                });
+                if (messages.length == 0) {
+                    messages = false;
+                } else {
+                    messages.sort((a, b) => (a.time > b.time) ? 1 : -1);
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
+
+        return messages;
     }
 
     /**
@@ -110,6 +149,7 @@ class ChannelModel{
     
             //Update channel
             var channelDoc = AraDTDatabase.storage.collection('channels').doc(channelId);
+            
             await channelDoc.update(updatedChannel)
                 .catch((error) => {
                     throw Error(error);
@@ -134,7 +174,6 @@ class ChannelModel{
         try {
             //Build new channel from request object
             var newChannel = await this.buildChannel(request);
-    
             //Update channel
             await AraDTDatabase.storage.collection('channels')
                 .add(newChannel)
@@ -147,7 +186,6 @@ class ChannelModel{
         }
     }
 
-
     /**
      * buildChannel method fetches validated 
      * channel data from POST request object
@@ -158,11 +196,14 @@ class ChannelModel{
      */
     buildChannel = async (request) => {
         
-        var currentUser = await AraDTDatabase.firebase.auth().currentUser;
+        var currentUser = request.session.user;
         var slugName = AraDTValidator.makeSlug(request.body.name);
         var image = '';
         var avatar = (request.files && request.files.avatar) ? request.files.avatar : false;
-        var users = (request.body.users) ? request.body.users : {};
+        var users = (request.body.users) ? request.body.users : [];
+        if (!Array.isArray(users)) {
+            users = [users];
+        }
         
         if (avatar) {
             var { result, validExtension } = AraDTImageUpload.uploadImage(avatar, slugName);
@@ -196,7 +237,7 @@ class ChannelModel{
      */
     deleteChannel = async(channelId) => {
 
-        var currentUser = await AraDTDatabase.firebase.auth().currentUser;
+        var currentUser = request.session.user;
         var channelDoc = AraDTDatabase.storage.collection('channels').doc(channelId);
         await channelDoc.get()
             .then((datum) => {
@@ -217,9 +258,9 @@ class ChannelModel{
      * the current user 
      * is the owner
      */
-    getOwnedChannels = async () => {
+    getOwnedChannels = async (request) => {
 
-        var currentUser = await AraDTDatabase.firebase.auth().currentUser;
+        var currentUser = request.session.user;
         var channels = [];
         await AraDTDatabase.storage.collection('channels')
             .where('owner', '==', currentUser.uid)
@@ -247,9 +288,9 @@ class ChannelModel{
      * the current user 
      * is a member
      */
-    getSubscribedChannels = async () => {
+    getSubscribedChannels = async (request) => {
 
-        var currentUser = await AraDTDatabase.firebase.auth().currentUser;
+        var currentUser = request.session.user;
         var channels = [];
 
         //Filter by channels containing user id

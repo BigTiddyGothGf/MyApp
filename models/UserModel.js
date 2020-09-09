@@ -22,44 +22,9 @@ class UserModel{
             return this.instance;
         }
 
-        // Set CurrentUser values to false
-        this.id = false;
-        this.currentUser = false;
-        this.isLoggedIn = false;
-
         // assign class instance to this.instance
         this.instance = this;
         return this;
-    }
-
-    /**
-     * Called in UserController before any routing to assign Firebase User to Model
-     * Also called after user update
-     * 
-     * @param {Object}      currentUser     Firebase.auth().currentUser
-     */
-    setUser(currentUser){
-        this.id = currentUser.uid;
-        this.currentUser = currentUser;
-        this.isLoggedIn = true;
-    }
-
-    /**
-     * Return current user uid
-     * 
-     * @return {string}     currentUser.uid
-     */
-    getId() {
-        return this.id;
-    }
-
-    /**
-     * Return current Firebase user
-     * 
-     * @return {Object}     Firebase.auth().currentUser
-     */
-    getCurrentUser() {
-        return this.currentUser;
     }
 
     /**
@@ -90,14 +55,21 @@ class UserModel{
             // Firebase email and password login call
             await AraDTDatabase.firebase.auth()
                 .signInWithEmailAndPassword(user.email, user.password)
-                .then((data) => {
+                .then(async (data) => {
+                    var userDoc = AraDTDatabase.storage.collection('users').doc(data.user.uid);
+                    user = await userDoc.get();
+                    if (user.exists) {
+                        request.session.user = user.data();
+                    } else {
+                        // Now users matching these credentials
+                        throw new Error('No users match these credentials');
+                    }
                     // Promise to return token for the next stage
                     return data.user.getIdToken();
                 })
                 .then((token) => {
                     // Call suceeded, so store user token in session
                     request.session.token = token;
-                    response.locals.loggedin = true;
                 })
                 .catch((error) => {
                     // Throw login error from Firebase to calling method
@@ -140,14 +112,16 @@ class UserModel{
             // Firebase email and password registration call
             await AraDTDatabase.firebase.auth()
                 .createUserWithEmailAndPassword(user.email, user.password)
-                .then((data) => {
+                .then(async (data) => {
+                    var newUser = await this.addUser(data.user.email, data.user.uid);
+                    request.session.user = newUser;
                     // Promise to return token for the next stage
                     return data.user.getIdToken();
                 })
                 .then((token) => {
                     // Call suceeded, so store user token in session
                     request.session.token = token;
-                    response.locals.loggedin = true;
+                    return;
                 })
                 .catch((error) => {
                     // Throw error from Firebase to calling method
@@ -157,7 +131,7 @@ class UserModel{
     };
 
     /**
-     * Asynchronous function that wraps Firebase.auth().updateProfile()
+     * Asynchronous function that updates the user doc
      * On success, adds updated user to session
      * On failure, throws error to calling method
      * 
@@ -167,14 +141,16 @@ class UserModel{
      * @throws {Error}
      */
     update =  async (request, response) => {
-
+              
         // Extract form data from request
-        var upDatedUser = {
+        var updatedUser = {
             email: request.body.email,
             displayName: request.body.displayName
         }
+        var photoURL = false;
+
         // Check is email is valid and the user has a display name
-        var { valid, errors } = AraDTValidator.updateUserValid(upDatedUser);
+        var { valid, errors } = AraDTValidator.updateUserValid(updatedUser);
 
         if (!valid) {
             // Validation failed, so return errors
@@ -182,18 +158,29 @@ class UserModel{
         } else {
             // If form includes new avatar, upload this
             if (request.files) {
-                upDatedUser.photoURL = this.updateAvatar(request, response);
+                photoURL = this.updateAvatar(request, response);
             }
+
+            var currentUser = request.session.user;
+
             // Firebase profile update call
-            await this.currentUser.updateProfile(upDatedUser)
-                .then(function() {
-                    var currentUser = AraDTDatabase.firebase.auth().currentUser;
-                    if (currentUser != null) {
-                        // Update succeeded, so update UserModel, session, and local variables
-                        AraDTUserModel.setUser(currentUser);
-                        request.session.user = currentUser;
+            
+            await AraDTDatabase.firebaseAdmin.auth().updateUser(currentUser.uid, updatedUser)
+                .then(async (userRecord) => {
+                    if (photoURL) {
+                        updatedUser.photoURL = photoURL;
+                    }
+                    var userDoc = AraDTDatabase.storage.collection('users').doc(currentUser.uid);
+                    var updateRef = await userDoc.update(updatedUser);
+                    var user = await userDoc.get();
+                    
+                    if (user.exists) {
+                        request.session.user = user.data();
                         response.locals.user = request.session.user;
                         request.session.save();
+                    } else {
+                        // No users matching these credentials
+                        throw new Error('No users match these credentials');
                     }
                 })
                 .catch(function(error) {
@@ -202,7 +189,6 @@ class UserModel{
                 });
         }
     };
-    
 
     /**
      * Asynchronous function that wraps Firebase.auth().updatePassword()
@@ -216,24 +202,26 @@ class UserModel{
     updatePassword = async (request, response) => {
 
         // Extract form data from request
-        var user = {
+        var updatedUser = {
             password: request.body.password,
             passwordConfirm: request.body.passwordConfirm
         }
         
         // Check password is over 6 chars and matches passwordConfirm
-        var { valid, errors } = AraDTValidator.updatePasswordValid(user);
+        var { valid, errors } = AraDTValidator.updatePasswordValid(updatedUser);
+            
+        var currentUser = request.session.user;
 
-        if (!valid) {
-            // Validation failed, so return errors
-            throw new Error(errors);
-        } else {
-            // Firebase password update call
-            await this.currentUser.updatePassword(user.password)
-                .catch((error) => {
-                    throw new Error(error);
-                });
-        }        
+        // Firebase profile update call
+        await AraDTDatabase.firebaseAdmin.auth().updateUser(currentUser.uid, updatedUser)
+            .then(async (userRecord) => {
+                console.log('############### update password userRecord ###########');
+                console.log(userRecord);
+            })
+            .catch(function(error) {
+                // Throw error from Firebase to calling method
+                throw new Error(error);
+            });   
 
     };
 
@@ -280,16 +268,15 @@ class UserModel{
      * Uses ImageUpload class to check if filetype is allowed
      * then saves avatar to '/public/img/userid.ext'
      * 
-     * @param {Object}      request       Express request object
-     * @param {Object}      response      Express response object
+     * @param {Object}      request     Express request object
+     * @param {Object}      userId      user Id
      * 
      * @throws {Error}
      * 
-     * @returns {Object}    response.render call
      */
-    updateAvatar(request, response){
+    updateAvatar(request, userId){
         
-        var { result, validExtension } = AraDTImageUpload.uploadImage(request.files.avatar, AraDTUserModel.getId());
+        var { result, validExtension } = AraDTImageUpload.uploadImage(request.files.avatar, userId);
         if (validExtension) {
             return result;
         } else {
@@ -299,7 +286,38 @@ class UserModel{
 
     };
 
-    
+    /**
+     * addUser method stores validated 
+     * User data to Firebase as a new User
+     * 
+     * @param {Object} newUser new User object
+     * 
+     * @throws {Object} Error std error class
+     */
+    addUser = async (userEmail, userUid) => {
+        
+        var newUser = {
+            uid: userUid,
+            email: userEmail,
+            displayName: '',
+            photoURL: '',
+            createdAt: new Date().toISOString()
+        }
+        //Add User
+        await AraDTDatabase.storage.collection('users')
+            .doc(newUser.uid)
+            .set(newUser)
+            .then(function(data) {
+                console.log('############### Add User Data ###########');
+                console.log(data);
+            })
+            .catch((error) => {
+                throw Error(error);
+            });
+
+        return newUser;
+    }
+
     /**
      * Gets all users from Firebase
      * 
@@ -307,31 +325,56 @@ class UserModel{
      * 
      * @returns {Array}    array of all registered users
      */
-    getUsers = async(currentUserId = false) => {
+    getUsers = async() => {
+        
         var users = [];
-        await AraDTDatabase.firebaseAdmin.auth().listUsers()
+
+        await AraDTDatabase.storage.collection('users')
+            .get()
             .then((data) => {
-                // Add users to the array
-                data.users.forEach((datum) => {
-                    //Exclude current user if passed to getUsers request
-                    if (!currentUserId ||
-                        datum.uid != currentUserId) {
-                            users.push({
-                                id: datum.uid,
-                                name: datum.displayName,
-                                image: datum.photoURL,
-                            });
-                    }
+                data.forEach((user) => {
+                    users.push(user.data());
                 });
                 if (users.length == 0) {
                     users = false;
                 }
             })
-            .catch(function(error) {
-                //Do not throw error, just log the issue
-                console.log('Error fetching user data:', error);
+            .catch((error) => {
+                console.log('Error fetching channel data:' + error.message);
             });
         return users;
+    }
+
+    /**
+     * buildUser method fetches validated 
+     * User data from POST request object
+     * 
+     * @param {Object} request Express request object
+     * 
+     * @returns {Object} user object
+     */
+    buildUser = async (request) => {
+        
+        // If form includes new avatar, upload this
+        // Extract form data from request
+        var userEmail = request.body.email;
+        var displayName = request.body.displayName;
+        var currentUser = request.session.user;
+        var photoURL = '';
+        
+        // If form includes new avatar, upload this
+        if (request.files) {
+            photoURL = this.updateAvatar(request, response);
+        }
+
+        var userData = {
+            uid: currentUser.uid,
+            email: userEmail,
+            displayName: displayName,
+            photoURL: photoURL
+        }
+
+        return userData;
     }
 
 }

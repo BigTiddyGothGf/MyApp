@@ -1,4 +1,4 @@
-var UserController = require('../controllers/UserController'); 
+var UserController = require('../controllers/UserController');
 var ChannelController = require('../controllers/ChannelController');
 var createError = require('http-errors');
 
@@ -23,20 +23,7 @@ class Router{
      * to local values
      */
     setVariables(){
-
-        AraDTApp.use(async (request, response, next) => {
-
-            console.log("################# Session Data #####################");
-            console.log(request.session);
-            // Check if user logged in for this session
-            if (request.session.user) {
-                response.locals.user = request.session.user;
-                response.locals.loggedin = true;
-            }
-
-            response.locals.channels = {};
-            await this.fetchAllChannelsData(response);
-            
+        AraDTApp.use(function(request, response, next) {
             if (request.session.errors) {
                 response.locals.errors = request.session.errors;
             }
@@ -52,18 +39,25 @@ class Router{
      */
     addBaseRoutes() {
         AraDTApp.get('/', this.index);
+        AraDTApp.get('/register', this.signup);
+        AraDTApp.get('/working', this.working); //Added to see working page. (remove in future)
     }
 
+    signup(request, response){
+        response.render('register');
+    }
 
+    working(request, response){ // Added to see working page. (remove in future)
+        response.render('working');
+    }
+    
     /**
      * Add controllers for key models, 
      * e.g. Users, Channels, Messages
      */
     addControllers() {
-        var channelController = new ChannelController();
         var userController = new UserController();
-        channelController.addRoutes();
-        userController.addRoutes();
+        var channelController = new ChannelController();
     }
 
     // Renders home page ./views/index.ejs
@@ -83,7 +77,6 @@ class Router{
         
         //  error handler
         AraDTApp.use(function(error, request, response, next) {
-            
             if (error) {
                 console.log('Error', error);
             }
@@ -95,12 +88,6 @@ class Router{
             response.status(error.status || 500);
             response.render('error');
         });
-    }
-    
-    fetchAllChannelsData = async (response) => {
-        response.locals.channels.all = await AraDTChannelModel.getAllChannels();
-        console.log("################# All Channels Data #####################");
-        console.log(response.locals.channels.all);
     }
 
 }

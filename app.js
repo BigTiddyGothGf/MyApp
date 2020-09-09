@@ -1,8 +1,9 @@
 // Add all required modules
+var http = require('http');
+var socketIo = require('socket.io');
 var express = require('express');
 var session = require('express-session');
 var path = require('path');
-var logger = require('morgan');
 var fileUpload = require('express-fileupload');
 
 /** 
@@ -12,7 +13,7 @@ var fileUpload = require('express-fileupload');
  */
 AraDTApp = express();
 AraDTApp.use(session({
-    secret: 'hurrdurr',
+    secret: 'hodor',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
@@ -30,12 +31,19 @@ AraDTApp.set('view engine', 'ejs');
  *      Request string parsing
  */ 
 AraDTApp.use(fileUpload({createParentPath: true}));
-AraDTApp.use(logger('dev'));
 AraDTApp.use(express.json());
 AraDTApp.use(express.urlencoded({ extended: false }));
 
 // Assign static files directory
 AraDTApp.use(express.static(path.join(__dirname, 'public')));
+
+AraDTApp.use('/socket', express.static('./node_modules/socket.io-client/dist'));
+
+AraDTServer = http.createServer(AraDTApp);
+AraDTIO = socketIo.listen(AraDTServer);
+
+const PORT = process.env.PORT || 3000;
+AraDTServer.listen(PORT);
 
 /**
  * Add simple MVC framework including:
@@ -52,10 +60,12 @@ var ImageUpload = require('./classes/ImageUpload');
 AraDTImageUpload = new ImageUpload();
 var Validator = require('./classes/Validator');
 AraDTValidator = new Validator();
-var UserModel = require('./models/UserModel');
-AraDTUserModel = new UserModel();
+var Socket = require('./classes/Socket');
+AraDTSocket = new Socket();
 var ChannelModel = require('./models/ChannelModel');
 AraDTChannelModel = new ChannelModel();
+var UserModel = require('./models/UserModel');
+AraDTUserModel = new UserModel();
 var Router = require('./classes/Router');
 AraDTRouter = new Router();
 
