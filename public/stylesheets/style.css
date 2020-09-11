@@ -11,7 +11,7 @@
 t{
   padding-left: 20px;
 }
-a{
+#channel-link{
   font-size: 20px;
   color: rgba(255, 255, 255, 0.719);
   font-weight: bold;
@@ -19,7 +19,7 @@ a{
 a i{
   margin-right: 0.4rem;
 }
-d{
+a{
   font-weight: bold;
   color: rgba(188, 48, 253, 0.849);
 }
@@ -44,6 +44,7 @@ h1{
 }
 h2{
   color: rgba(255, 255, 255, 0.719);
+  font-weight: bold;
 }
 h3{
   font-weight: bold;
@@ -66,6 +67,7 @@ h5{
 }
 p{
   color: rgba(255, 255, 255, 0.719);
+  font-size: 15px;
 }
 .chat-form{
   padding-bottom: 10%;
@@ -118,6 +120,7 @@ main{
 label{
   color: rgba(255, 255, 255, 0.719);
   width: 100%;
+  font-size: 20px;
 }
 #channel-dsiplay-name{
   padding-top: 15px;
@@ -127,6 +130,12 @@ label{
 }
 #select-which-user-to-add-to-the-channel{
   padding-top: 30px;
+}
+#email-label{
+  padding-top: 15px;
+}
+#avatar-label{
+  padding-top: 15px;
 }
 
 
@@ -169,6 +178,12 @@ label{
   width: 100%;
   background-color: rgba(26, 26, 26);
   color: rgba(255, 255, 255, 0.719);
+}
+#account-file-button{
+  width: 100%;
+  background-color: rgba(26, 26, 26);
+  color: rgba(255, 255, 255, 0.719);
+  padding-bottom: 15px;
 }
 
 

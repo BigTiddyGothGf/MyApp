@@ -12,31 +12,20 @@
 	<body>
 		<header id="header">
 			<nav id="navbar" class="navbar navbar-expand-lg">
-						<b id="brand" class="navbar-brand" href="#">BLEP</b>
+						<a id="brand" class="navbar-brand" href="http://localhost:3000/account">BLEP</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<i class="fas fa-angle-down" id="down-arrow"></i>
 						</button>
 						<div class="collapse navbar-collapse" id="navbarNav">
 							<ul class="nav navbar-nav ml-auto">
-								<li class="nav-item dropdown">
-									<d class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="fas fa-address-book"></i>Channels
-									</d>
-									<div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-									<d class="dropdown-item text-light" href="#">Channel 1</d>
-									<d class="dropdown-item text-light" href="#">Channel 2</d>
-									<div class="dropdown-divider"></div>
-									<d class="dropdown-item text-light" href="#"><i class="fas fa-address-book"></i>Manage Channels</d>
-									</div>
+								<li class="nav-item">
+									<a class="nav-link" href="http://localhost:3000/channels"><i class="fas fa-address-book"></i>Channels</a>
 								</li>
 								<li class="nav-item">
-									<d class="nav-link" href="#"><i class="fas fa-user"></i>Users</d>
+									<a class="nav-link" href="http://localhost:3000/account"><i class="fas fa-user-circle"></i>My Profile</a>
 								</li>
 								<li class="nav-item">
-									<d class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</d>
-								</li>
-								<li class="nav-item">
-									<d class="nav-link" href="#"><i class="fas fa-power-off"></i>Logout</d>
+									<a class="nav-link" href="http://localhost:3000/"><i class="fas fa-power-off"></i>Logout</a>
 								</li>
 							</ul>
 						</div>
