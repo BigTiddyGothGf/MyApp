@@ -2,7 +2,7 @@
 <div id="main">
   <div class="container-fluid">
     <div class="row">
-      <div id="sidebar1" class="col-md-4">
+      <div id="sidebar1" class="col-md-3">
         
         <% var owned = locals.channels.owned %>
         <div id="owned-channels" class="user-channels">
@@ -36,13 +36,19 @@
         </div>
 
       </div>
-      <main id="channels" role="main" class="col-md-8">
+      <main id="channels" role="main" class="col-md-9">
         <h3>Channels</h3>
 
         <% var users = locals.channels.users %>
+
+        <% if (locals.errors.channels && locals.errors.channels.general) { %>
+          <% locals.errors.channels.general.forEach(function(error) { %>
+            <p class="alert alert-primary" role="alert"><%= error %></p>
+          <% }) %>
+        <% } %>
         <form id="channel-create-form" action="/channels/add" method="post" enctype="multipart/form-data">
-            <label id="channel-dsiplay-name">Channel Display Name (max: 20 characters)</label>
-          <input type="text" class="form-control" name="name" placeholder="Channel Display Name" value="" maxlength="20">
+            <label id="channel-dsiplay-name">Channel Display Name (max: 16 characters)</label>
+          <input type="text" class="form-control" name="name" placeholder="Channel Display Name" value="" maxlength="16">
             <label id="channel-avatar">Channel Avatar</label>
           <input type="file" name="avatar" id="channel-pic-input">
             <label id="select-which-user-to-add-to-the-channel">Select which users to add to the channel</label>

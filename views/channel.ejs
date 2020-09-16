@@ -8,7 +8,7 @@ var participants = (locals.channel.inUsers) ? locals.channel.inUsers : false
 			<div id="main">
 				<div class="container-fluid">
 					<div class="row">
-						<div id="sidebar" class="col-md-5 col-sm-6 d-none d-sm-block">
+						<div id="sidebar1" class="col-md-3 col-sm-6 d-none d-sm-block">
 							<% if (participants) { %>
 							<div id="participants">
 								<h4>Channel Members</h4>
@@ -18,7 +18,7 @@ var participants = (locals.channel.inUsers) ? locals.channel.inUsers : false
 										<div class="avatar">
 											<img src="<%= user.image %>" alt="<%= user.name %>">
 										</div>
-										<p><%= user.name %> <small class="text-muted d-none"> typing... </small></p>
+										<label><%= user.name %> <small class="text-muted d-none"> typing... </small></label>
 									</li>
 								<% }) %>
 								</ul>
