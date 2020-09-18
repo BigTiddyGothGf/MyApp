@@ -1,0 +1,34 @@
+<div id="sidebar1" class="col-md-3">
+        
+    <% var owned = locals.channels.owned %>
+    <div id="owned-channels" class="user-channels">
+      <h4 id="your-channels">Your Channels</h4>
+    <% if (owned) { %>
+      <ul>
+      <% owned.forEach(function(channel) { %>
+        <li class="d-flex justify-content-between align-items-center">
+          <img src="<%= channel.image %>" alt="<%= channel.name %>">
+          <a id="channel-link" href="/channel/<%= channel.id %>/"><%= channel.name %></a>
+          <a id="channel-link" href="/channels/delete/<%= channel.id %>/"><t class="fa fa-trash" aria-hidden="true"></t></a>
+        </li>
+      <% }) %>
+      </ul>
+    <% }  %>
+    </div>
+
+    <% var subscribed = locals.channels.subscribed %>
+    <div id="subscribed-channels" >
+      <h4>Subscribed Channels</h4>
+    <% if (subscribed) { %>
+      <ul>
+      <% subscribed.forEach(function(channel) { %>
+        <li>
+          <img src="<%= channel.image %>" alt="<%= channel.name %>">
+          <a id="channel-link" href="/channel/<%= channel.id %>/"><%= channel.name %></a>
+        </li>
+      <% }) %>
+      </ul>
+    <% }  %>
+    </div>
+
+  </div>

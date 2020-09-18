@@ -8,9 +8,6 @@
   font-size: 60px;
   color: rgba(188, 48, 253, 0.849);
 }
-t{
-  padding-right: 5px;
-}
 #channel-link{
   font-size: 20px;
   color: rgba(255, 255, 255, 0.719);
@@ -57,21 +54,17 @@ h3{
 }
 h4{
   font-weight: bold;
+  font-size: 25px;
   color: rgba(188, 48, 253, 0.849);
 }
 h5{
   color: rgba(188, 48, 253, 0.849);
   font-size: 50px;
   font-weight: bold;
-  /*
-  padding-bottom: 5%;
-  padding-left: 30px;
-  padding-right: 30px;
-  */
 }
 p{
   color: rgba(255, 255, 255, 0.719);
-  font-size: 15px;
+  font-size: 18px;
 }
 .chat-form{
   padding-bottom: 10%;
@@ -113,7 +106,13 @@ pre{
   border: 10px rgba(165, 48, 219, 0.253);
 }
 main{
-  padding: 30%;
+  padding: 10%;
+}
+
+
+/*Side-Bar*/
+t{
+  padding-left: 15px;
 }
 
 
@@ -144,11 +143,6 @@ label{
 
 
 /* Avatar */
-
-/*.avatar{
-  width: 40%;
-  border-radius: 15px;
-}*/
 .avatar img{
   border-radius: 50%;
   width: 300px;
@@ -158,34 +152,45 @@ label{
 }
 #owned-channels img{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-image: "channel.image";
   background-size: cover;
 }
 #owned-channels li{
-  padding-bottom: 10px;
+  border-bottom-color: rgba(126, 126, 126, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: outset;
+  border-right-style: double;
+  padding:5px 10px 0px 5px;
 }
 #owned-channels ul{
   padding-left: 0px;
 }
 #subscribed-channels img{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-image: "channel.image";
   background-size: cover;
+  margin-right: 15px;
 }
 #subscribed-channels li{
-  padding-bottom: 10px;
+  border-bottom-color: rgba(126, 126, 126, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: outset;
+  border-right-style: double;
+  padding:5px 10px 0px 5px;
 }
 #subscribed-channels ul{
   padding-left: 0px;
 }
 #participants img{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-image: "channel.image";
   background-size: cover;
 }
@@ -214,10 +219,6 @@ label{
 #your-channels{
   padding-top: 30px;
 }
-
-
-/* Friends List*/
-
 
 
 /* Error */
