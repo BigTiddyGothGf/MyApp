@@ -1,17 +1,15 @@
 /* Header */
 #header{
-  background: rgb(32, 32, 32);
+  background: rgb(188,48,253);
+  background: linear-gradient(90deg, rgba(188,48,253,1) 2%, rgba(75,20,130,1) 29%, rgba(29,29,29,1) 77%);
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom-style: solid;
   border-bottom-right-radius: 60px;
 }
 #brand{
   font-weight: bold;
   font-size: 60px;
-  color: rgba(188, 48, 253, 0.849);
-}
-#channel-link{
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.719);
-  font-weight: bold;
+  color: rgba(10, 10, 10, 0.849);
 }
 a i{
   margin-right: 0.4rem;
@@ -32,10 +30,6 @@ d i{
 
 
 /*Universal*/
-#sidebar1{
-  background-color: rgb(29, 29, 29);
-  padding-top: 10px;
-}
 body{
   background-color: rgb(26, 26, 26);
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -97,6 +91,8 @@ pre{
 #account{
   padding-top: 5%;
   padding-left: 10%;
+  background: rgb(24,24,24);
+background: radial-gradient(circle, rgba(24,24,24,1) 0%, rgba(30,30,30,1) 52%, rgba(26,26,26,1) 100%);
 }
 .message{
  margin-bottom: 30px;
@@ -106,13 +102,16 @@ pre{
   border: 10px rgba(165, 48, 219, 0.253);
 }
 main{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-left-style: solid;
+  border-bottom: solid;
   padding: 10%;
 }
-
-
-/*Side-Bar*/
-t{
-  padding-left: 15px;
+#sidebar1{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom: solid;
+  background: rgb(29,29,29);
+  padding-top: 10px;
 }
 
 
@@ -142,7 +141,7 @@ label{
 }
 
 
-/* Avatar */
+/* Avatar-img */
 .avatar img{
   border-radius: 50%;
   width: 300px;
@@ -157,16 +156,12 @@ label{
   background-image: "channel.image";
   background-size: cover;
 }
-#owned-channels li{
-  border-bottom-color: rgba(126, 126, 126, 0.849);
-  border-bottom-left-radius: 100px;
-  border-top-left-radius: 100px;
-  border-bottom-style: outset;
-  border-right-style: double;
-  padding:5px 10px 0px 5px;
-}
-#owned-channels ul{
-  padding-left: 0px;
+#participants img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background-image: "channel.image";
+  background-size: cover;
 }
 #subscribed-channels img{
   border-radius: 50%;
@@ -176,24 +171,7 @@ label{
   background-size: cover;
   margin-right: 15px;
 }
-#subscribed-channels li{
-  border-bottom-color: rgba(126, 126, 126, 0.849);
-  border-bottom-left-radius: 100px;
-  border-top-left-radius: 100px;
-  border-bottom-style: outset;
-  border-right-style: double;
-  padding:5px 10px 0px 5px;
-}
-#subscribed-channels ul{
-  padding-left: 0px;
-}
-#participants img{
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  background-image: "channel.image";
-  background-size: cover;
-}
+
 
 
 /*Buttons*/
@@ -209,15 +187,45 @@ label{
 }
 #account-file-button{
   width: 100%;
-  background-color: rgba(26, 26, 26);
   color: rgba(255, 255, 255, 0.719);
+  background-color: transparent;
   padding-bottom: 15px;
 }
 
 
 /*Channels*/
 #your-channels{
-  padding-top: 30px;
+  padding-top: 15px;
+}
+#owned-channels li{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: solid;
+  border-right-style: double;
+  padding:5px 10px 0px 5px;
+}
+#owned-channels ul{
+  padding-left: 0px;
+}
+#subscribed-channels{
+  padding-top: 15px;
+}
+#subscribed-channels li{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: solid;
+  border-right-style: double;
+  padding:5px 10px 0px 5px;
+}
+#subscribed-channels ul{
+  padding-left: 0px;
+}
+#channel-link{
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.719);
+  font-weight: bold;
 }
 
 
