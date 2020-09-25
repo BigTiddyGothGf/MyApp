@@ -204,17 +204,18 @@ class ChannelController{
         var errors = request.session.errors.channels;
         errors.general = [];
         var channelId = request.params.channelId;
+        var currentUser = request.session.user;
 
         if (!channelId) {
             errors.general = ['You need to specify a channel to delete'];
         } else {
             try{
-                await AraDTChannelModel.deleteChannel(channelId)
+                await AraDTChannelModel.deleteChannel(channelId, currentUser.uid)
                     .then(() => {
                         errors.general = ['Your channel has been deleted'];
                         response.redirect('/channels');
                     })
-                    .catch(() => {
+                    .catch((error) => {
                         errors.general = ['There was a problem deleting your channel'];
                         response.redirect('/channels');
                     });

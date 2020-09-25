@@ -210,7 +210,7 @@ class ChannelModel{
             if (validExtension) {
                 image = result;
             } else {
-                throw Error(result.result);
+                throw Error(result);
             }
         } else if (request.body.avatar) {
             image = request.body.avatar;
@@ -235,15 +235,13 @@ class ChannelModel{
      * @param {String} channelId 
      * 
      */
-    deleteChannel = async(channelId) => {
+    deleteChannel = async(channelId, currentUserId) => {
 
-        var currentUser = request.session.user;
         var channelDoc = AraDTDatabase.storage.collection('channels').doc(channelId);
         await channelDoc.get()
             .then((datum) => {
-                if (datum.data().owner == currentUser.uid) {
+                if (datum.data().owner == currentUserId) {
                     channelDoc.delete();
-                    return ['This channel has been deleted'];
                 } else {
                     throw new Error(['You do not have authorisation to delete this channel']);
                 }

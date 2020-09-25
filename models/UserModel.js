@@ -276,7 +276,7 @@ class UserModel{
      * 
      */
     updateAvatar(request, userId){
-
+        
         var { result, validExtension } = AraDTImageUpload.uploadImage(request.files.avatar, userId);
         if (validExtension) {
             return result;
