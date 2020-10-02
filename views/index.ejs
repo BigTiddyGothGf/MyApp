@@ -6,8 +6,11 @@
         
       </div>
       <main id="login" role="main" class="col-md-9">
-        <h5 id="welcome">WECOME TO BLEP!</h5>
-        <h2>Login</h2>
+        <h5 id="welcome">WECOME TO VOID!</h5>
+
+        <hr>
+
+        <h2 id="login-label">Login</h2>
         <% if (locals.errors && locals.errors.login) { %>
           <% locals.errors.login.forEach(function(error) { %>
             <p class="alert alert-primary" role="alert"><%= error %></p>
@@ -16,15 +19,18 @@
 
         <form action="/login" method="post" class="chat-form">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Email Address</label>
             <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email">
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+          <div class="form-group" id="login-password">
+            <label for="exampleInputPassword1" id="password-label">Password</label>
             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        <hr>
+
         <h2 id="notRegistered">Not registered?</h2>
         <a href="http://localhost:3000/register" class="btn btn-secondary" role="button">Register</a>
       </main>
