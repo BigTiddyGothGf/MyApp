@@ -28,14 +28,14 @@
             <label id="select-which-user-to-add-to-the-channel">Select Which Users To Add To The Channel</label>
           <% if (users) { %>
             <% users.forEach(function(user) { %>
-              <div class="custom-control custom-checkbox">
+              <div class="custom-control custom-checkbox" id="select-channel-users">
                 <input type="checkbox" class="custom-control-input" id="user<%= user.id %>" name="users" value="<%= user.id %>">
                 <label class="custom-control-label" for="user<%= user.id %>"><%= user.name %></label>
               </div>
             <% }) %>
           <% } %>
 
-          <button id="update" type="submit" class="btn btn-primary">create</button>
+          <button id="update" type="submit" class="btn btn-primary">Create</button>
         </form>
 
 
