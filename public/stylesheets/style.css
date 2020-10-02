@@ -22,16 +22,10 @@ d i{
   margin-right: 0.4rem;
 }
 .navbar-toggler{
-  background-color: rgba(77, 77, 77, 0.253);
-  border: solid;
-  border-color: rgba(255, 255, 255, 0.719);
-  margin: 10px;
+  background-color: rgba(77, 77, 77, 0.253)
 }
 #down-arrow{
   color: rgba(255, 255, 255, 0.719);
-}
-#navbar-links{
-  background-color: rgba(29,29,29,1);
 }
 
 
@@ -68,17 +62,19 @@ p{
   font-size: 18px;
 }
 .chat-form{
-  padding-bottom:20px;
+  padding-bottom: 10%;
 }
 pre{
   color: rgba(255, 255, 255, 0.719);
 }
+#notRegistered{
+  padding-bottom: 10px;
+}
 hr{
   margin: 0px 0;
   height: 2px;
-  background: rgb(41,41,41);
-  background: linear-gradient(90deg, rgba(41,41,41,1) 40%, rgba(26,26,26,1) 100%);
-  width: 80%x;
+  background: rgb(26,26,26);
+  background: linear-gradient(292deg, rgba(26,26,26,1) 20%, rgba(43,43,43,1) 86%);
 }
 
 
@@ -110,13 +106,11 @@ main{
   border-color: rgba(41, 41, 41, 0.849);
   border-left-style: solid;
   border-bottom: solid;
-  border-bottom-color: rgba(41, 41, 41, 0.849);
   padding: 10%;
 }
 #sidebar1{
   border-color: rgba(41, 41, 41, 0.849);
   border-bottom: solid;
-  border-bottom-color: rgba(41, 41, 41, 0.849);
   background: rgb(29,29,29);
   padding-top: 10px;
 }
@@ -129,10 +123,10 @@ main{
 label{
   color: rgba(255, 255, 255, 0.719);
   width: 100%;
-  font-size: 25px;
+  font-size: 20px;
 }
 #channel-dsiplay-name{
-  padding-top: 30px;
+  padding-top: 25px;
 }
 #channel-avatar{
   padding-top: 30px;
@@ -147,31 +141,7 @@ label{
   padding-top: 15px;
 }
 #channel-picture{
-  padding-top: 29px;
-}
-#login-label{
-  padding-top: 30px;
-  padding-bottom: 15px;
-}
-#register-label{
-  padding-top: 30px;
-  padding-bottom: 15px;
-}
-#display-name{
-  padding-top: 15px;
-}
-#password-label{
-  padding-top: 15px;
-}
-#reg-password-label{
-  padding-top: 15px;
-}
-#notRegistered{
-  padding-top: 30px;
-  padding-bottom: 15px;
-}
-#select-channel-users label{
-  font-size: 20px;
+  padding-top: 25px;
 }
 
 
@@ -225,17 +195,12 @@ label{
   padding-bottom: 15px;
 }
 .form-control{
-  width: 60% !important; 
+  width: 60%;
   background-color: rgba(0, 0, 0, 0.253);
-  color: rgb(221, 221, 221);
-}
-.form-control:focus{
-  background-color: rgba(0, 0, 0, 0.253);
-  color: #fff;
 }
 .custom-file-label{
   color: rgb(124, 124, 124);
-  width: 60% !important;
+  width: 60%;
   background-color: rgba(0, 0, 0, 0.253);
   height: 38px;
   font-size: 1rem;
@@ -244,46 +209,26 @@ label{
 .custom-file-label::after {
   color: rgba(255, 255, 255, 1);
   content: "Browse";
-  background-color: rgb(146, 36, 197);
+  background-color: rgba(188, 48, 253, 0.849);
   border-left: inherit;
   height: 36px;
   font-weight: 400;
 }
 .btn-primary {
   color: #fff;
-  background-color: rgb(146, 36, 197);
-  border-color: rgb(146, 36, 197);
-  margin-bottom: 25px;
+  background-color: rgb(188,48,253);
+  border-color: rgb(188,48,253);
 }
 .btn-primary:hover {
   color: #fff;
   background-color: rgb(106, 20, 146);
   border-color: rgb(106, 20, 146);
 }
-.btn-secondary {
-  color: #fff;
-  background-color: rgb(146, 36, 197);
-  border-color: rgb(146, 36, 197);
-}
-.btn-secondary:hover {
-  color: #fff;
-  background-color: rgb(106, 20, 146);
-  border-color: rgb(106, 20, 146);
-}
-#submit-changes-button{
-  margin-top: 20px;
-}
 #update{
   margin-top: 30px;
 }
 .custom-control{
   padding-top: 15px;
-}
-#login-password{
-  padding-bottom: 20px;
-}
-#register-password-confirm{
-  padding-bottom: 20px;
 }
 
 
@@ -292,15 +237,25 @@ label{
   padding-top: 15px;
 }
 #owned-channels li{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: solid;
+  border-right-style: double;
   padding:5px 10px 0px 5px;
 }
 #owned-channels ul{
   padding-left: 0px;
 }
 #subscribed-channels{
-  padding-top: 30px;
+  padding-top: 15px;
 }
 #subscribed-channels li{
+  border-color: rgba(41, 41, 41, 0.849);
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+  border-bottom-style: solid;
+  border-right-style: double;
   padding:5px 10px 0px 5px;
 }
 #subscribed-channels ul{
@@ -310,14 +265,6 @@ label{
   font-size: 20px;
   color: rgba(255, 255, 255, 0.719);
   font-weight: bold;
-}
-#subscribed-channels li{
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-#your-channels-spacer{
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 
